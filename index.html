@@ -173,7 +173,7 @@
 <body>
     <header>
         <div class="container">
-            <img src="eleganz-logo.png" alt="Eleganz Furnishing Studio Logo" class="logo">
+            <img src="logo.png" alt="Eleganz Furnishing Studio Logo" class="logo">
         </div>
     </header>
 
@@ -207,9 +207,8 @@
                     <option value="">-- Select Service --</option>
                     <option value="Curtains">Curtains & Blinds</option>
                     <option value="Sofas">Designer Sofas</option>
-                    <option value="Mattresses">Mattresses</option>
+                    <option value="Mattresses">Quality Mattresses</option>
                     <option value="Wooden Flooring">Wooden Flooring</option>
-                    <option value="Wall Paper">Wall Paper</option>
                     <option value="Complete Interior">Complete Interior Solution</option>
                 </select>
             </div>
@@ -231,7 +230,7 @@
         </div>
     </footer>
 
-    <!-- Script for form submission using GitHub and Google Sheets -->
+    <!-- Script for form submission using Google Sheets -->
     <script>
         const form = document.getElementById('dataCollectionForm');
         const statusMessage = document.getElementById('statusMessage');
@@ -249,7 +248,7 @@
             // Add timestamp
             data.timestamp = new Date().toISOString();
             
-            // In production, replace with your actual Google Sheet Web App URL
+            // Your Google Script Web App URL
             const scriptURL = 'https://script.google.com/macros/s/AKfycbwt22jMOXqiViK9Rhsp9ZdfgqLFaAQ5omcbfbRG3ZzFhugX8_K3Fa8_8d2AVHJy9g1S/exec';
             
             // Show loading status
@@ -257,16 +256,23 @@
             statusMessage.className = "status-message";
             statusMessage.style.display = "block";
             
-            // Send data to Google Sheets
-            fetch(scriptURL, {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
+            // Use JSONP approach which works better with Google Scripts
+            // Create URL with parameters
+            let url = new URL(scriptURL);
+            Object.keys(data).forEach(key => {
+                url.searchParams.append(key, data[key]);
+            });
+            
+            // Add callback parameter
+            url.searchParams.append('callback', 'handleFormResponse');
+            
+            // Create a script element
+            const script = document.createElement('script');
+            script.src = url.toString();
+            
+            // Define callback function
+            window.handleFormResponse = function(response) {
+                if (response && response.result === 'success') {
                     statusMessage.textContent = "Thank you! Your request has been submitted successfully.";
                     statusMessage.className = "status-message success";
                     form.reset();
@@ -274,12 +280,19 @@
                     statusMessage.textContent = "There was an error submitting your request. Please try again.";
                     statusMessage.className = "status-message error";
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
+                // Remove the script tag
+                document.body.removeChild(script);
+            };
+            
+            // Handle errors
+            script.onerror = function() {
                 statusMessage.textContent = "There was an error submitting your request. Please try again.";
                 statusMessage.className = "status-message error";
-            });
+                document.body.removeChild(script);
+            };
+            
+            // Append script to body
+            document.body.appendChild(script);
         });
     </script>
 </body>
