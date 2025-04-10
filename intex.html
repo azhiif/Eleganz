@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleganz Furnishing Studio</title>
+    <style>
+        :root {
+            --primary-color: #2a8267;
+            --secondary-color: #333333;
+            --light-color: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            text-align: center;
+        }
+        
+        .logo {
+            height: 60px;
+            margin-bottom: 10px;
+        }
+        
+        .intro {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .intro h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .intro p {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .malayalam {
+            font-size: 0.9rem;
+            color: #555;
+            margin-left: 5px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #1f6d52;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            background-color: white;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            
+            .intro h1 {
+                font-size: 1.8rem;
+            }
+            
+            .intro p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Status message styles */
+        .status-message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="logo.png" alt="Eleganz Furnishing Studio Logo" class="logo">
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <h1>Eleganz Furnishing Studio</h1>
+            <p>Premium curtains, sofas, mattresses, wooden flooring, and complete interior solutions.</p>
+        </div>
+
+        <form class="contact-form" id="dataCollectionForm">
+            <h2 class="form-title">Request Our Services</h2>
+            
+            <div class="form-group">
+                <label for="name">Your Name* <span class="malayalam">നിങ്ങളുടെ പേര്*</span></label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number* <span class="malayalam">ഫോൺ നമ്പർ*</span></label>
+                <input type="tel" id="phone" name="phone" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="location">Your Location* <span class="malayalam">നിങ്ങളുടെ സ്ഥലം*</span></label>
+                <input type="text" id="location" name="location" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="service">Service Required* <span class="malayalam">ആവശ്യമായ സേവനം*</span></label>
+                <select id="service" name="service" class="form-control" required>
+                    <option value="">-- Select Service --</option>
+                    <option value="Curtains">Curtains & Blinds</option>
+                    <option value="Sofas">Designer Sofas</option>
+                    <option value="Mattresses">Mattresses</option>
+                    <option value="Wooden Flooring">Wooden Flooring</option>
+                    <option value="Wall Paper">Wall Paper</option>
+                    <option value="Complete Interior">Complete Interior Solution</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="requirements">Your Requirements</label>
+                <textarea id="requirements" name="requirements" class="form-control" placeholder="Please describe what you need..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn">Submit Request</button>
+            
+            <div id="statusMessage" class="status-message"></div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Eleganz Furnishing Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Script for form submission using GitHub and Google Sheets -->
+    <script>
+        const form = document.getElementById('dataCollectionForm');
+        const statusMessage = document.getElementById('statusMessage');
+        
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Add timestamp
+            data.timestamp = new Date().toISOString();
+            
+            // In production, replace with your actual Google Sheet Web App URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwt22jMOXqiViK9Rhsp9ZdfgqLFaAQ5omcbfbRG3ZzFhugX8_K3Fa8_8d2AVHJy9g1S/exec';
+            
+            // Show loading status
+            statusMessage.textContent = "Submitting your request...";
+            statusMessage.className = "status-message";
+            statusMessage.style.display = "block";
+            
+            // Send data to Google Sheets
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusMessage.textContent = "Thank you! Your request has been submitted successfully.";
+                    statusMessage.className = "status-message success";
+                    form.reset();
+                } else {
+                    statusMessage.textContent = "There was an error submitting your request. Please try again.";
+                    statusMessage.className = "status-message error";
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                statusMessage.textContent = "There was an error submitting your request. Please try again.";
+                statusMessage.className = "status-message error";
+            });
+        });
+    </script>
+</body>
+</html>
