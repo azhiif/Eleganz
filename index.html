@@ -497,11 +497,8 @@
             });
             
             function handleSuccess() {
-                statusMessage.textContent = "Thank you! Your request has been submitted successfully.";
-                statusMessage.className = "status-message success";
-                form.reset();
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
+        // Immediately redirect to Instagram without showing success message
+                window.location.href = "https://instagram.com/eleganz_furnishing_studio";
             }
             
             function handleError(message) {
